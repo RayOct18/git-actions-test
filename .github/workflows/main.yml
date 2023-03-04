@@ -11,3 +11,15 @@ jobs:
          echo "Tag name from GITHUB_REF_NAME: $GITHUB_REF_NAME"
          echo "Tag name from github.ref_name: ${{  github.ref_name }}"
          echo "Short sha ${GITHUB_SHA::6}"
+
+  ssh-login:
+    runs-on: ubuntu-latest
+    steps:
+      - name: deploy app
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.KEY }}
+          script: |
+            echo "Hello"
